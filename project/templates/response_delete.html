@@ -1,0 +1,15 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+<h1>Удаление отклика</h1>
+<hr>
+{% if response.post.author == request.user %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>Удаляем отклик?</p>
+        <input type="submit" value="Delete" />
+    </form>
+{% else %}
+    <p class="lead">Вам сюда не надо!</p>
+{% endif %}
+{% endblock content %}
