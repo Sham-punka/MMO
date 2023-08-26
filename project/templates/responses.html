@@ -1,0 +1,35 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Responses
+{% endblock title %}
+
+{% block content %}
+    <h1>Все отклики</h1>
+        {% if responses %}
+            <form action="" method="get">
+               {{ filterset.form.as_p }}
+                <input type="submit" value="Найти" />
+             </form>
+            {% for resp in responses %}
+                <br>{{ resp.author }}</br>
+                <br>{{ resp.text|truncatewords:20 }}</br>
+                <br><a href="{% url 'response' pk=resp.id %}">Просмотреть</a></br>
+
+                 {% if resp.status %}
+                    <td><h2>принят</h2></td>
+                {% else %}
+                    <td><h2>не принят</h2></td>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <h2>Откликов нет!</h2>
+        {% endif %}
+
+        <button>
+        <a class="nav-link" href="{% url 'post_list' %}">
+          <h4><strong>назад</strong></h4>
+      </a>
+        </button>
+
+{% endblock content %}
